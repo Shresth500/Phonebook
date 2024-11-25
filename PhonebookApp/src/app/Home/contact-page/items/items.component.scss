@@ -1,0 +1,24 @@
+.padding {
+  gap: 10px;
+}
+
+.padding-between {
+  gap: 30px;
+}
+.card-body {
+  .card-text {
+    .btn-category {
+      display: none;
+      visibility: hidden;
+    }
+  }
+}
+
+.card-body:hover {
+  .card-text {
+    .btn-category {
+      gap: 20px;
+      visibility: visible;
+    }
+  }
+}

@@ -1,0 +1,117 @@
+<div class="col-md-3 col-md-offset-3 shadow w-100">
+  <form
+    name="form"
+    (ngSubmit)="addForm.form.valid && addNumber(addForm)"
+    #addForm="ngForm"
+    class="d-flex gap-50"
+    novalidate
+  >
+    <div
+      class="mb-3"
+      [ngClass]="{ 'has-error': addForm.submitted && !name.valid }"
+    >
+      <label for="username">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        name="name"
+        ngModel
+        #name="ngModel"
+        [(ngModel)]="filterKeyName"
+        required
+        pattern="^[A-Za-z\s]+$"
+      />
+      <div
+        class="error-message"
+        *ngIf="name.invalid && name.dirty && name.touched"
+      >
+        Should Contain Alphabets only
+      </div>
+      <div
+        *ngIf="addForm.submitted && !name.valid"
+        class="help-block text-danger"
+      >
+        Username is required
+      </div>
+    </div>
+    <div
+      class="mb-3"
+      [ngClass]="{ 'has-error': addForm.submitted && !number.valid }"
+    >
+      <label for="number">Number</label>
+      <input
+        type="text"
+        class="form-control"
+        id="number"
+        name="number"
+        ngModel
+        #number="ngModel"
+        [(ngModel)]="filterKeyNumber"
+        pattern="^\+(\d{1,4})-(\d{7,10})$"
+        required
+      />
+      <div
+        class="error-message"
+        *ngIf="number.invalid && number.dirty && number.touched"
+      >
+        Number should start with +91 and should contain number
+      </div>
+      <div
+        *ngIf="addForm.submitted && !number.valid"
+        class="help-block text-danger"
+      >
+        Number is required
+      </div>
+    </div>
+    <div class="form-group">
+      <button [disabled]="loading" class="btn btn-primary btn-submit">
+        Add
+      </button>
+      <img
+        *ngIf="loading"
+        src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+      />
+    </div>
+  </form>
+</div>
+
+<div class="row">
+  @for(contact of filteredcontactDetails;track contact){
+  <div class="col-12 col-md-3 my-3 d-flex padding">
+    <div class="card p-3 w-100 shadow">
+      <app-items
+        [filteredcontactDetail]="contact"
+        (delete)="deleteContact(contact.id)"
+        (edit)="editContacts($event, contact.id)"
+      >
+      </app-items>
+    </div>
+  </div>
+  }
+</div>
+
+<!--
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Please Confirm deletion!</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <div class="mb-3">
+      You are about to delete a workshop. This action cannot be undone. Are you
+      sure want to proceed ??
+    </div>
+    <div>
+      <button class="btn btn-light" (click)="modal.close('cancel')">
+        Cancel
+      </button>
+      <button class="btn btn-danger" (click)="modal.close('ok')">Ok</button>
+    </div>
+  </div>
+</ng-template>-->

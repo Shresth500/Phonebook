@@ -1,0 +1,45 @@
+.btn-submit {
+  margin: 10px;
+  position: relative;
+  top: 13px;
+}
+.gap-50 {
+  gap: 20%;
+}
+.padding {
+  gap: 10px;
+}
+
+.padding-between {
+  gap: 30px;
+}
+.card:hover {
+  border-color: goldenrod;
+}
+.card-body {
+  .card-text {
+    .btn-category {
+      display: none;
+      visibility: hidden;
+    }
+  }
+}
+
+.card-body:hover {
+  .card-text {
+    .btn-category {
+      gap: 20px;
+      visibility: visible;
+    }
+  }
+}
+
+.shadow {
+  -webkit-box-shadow: -1px -1px 33px -10px rgba(71, 114, 254, 1);
+  -moz-box-shadow: -1px -1px 33px -10px rgba(71, 114, 254, 1);
+  box-shadow: -1px -1px 33px -10px rgba(71, 114, 254, 1);
+}
+
+input[type="text"] {
+  width: 300px;
+}

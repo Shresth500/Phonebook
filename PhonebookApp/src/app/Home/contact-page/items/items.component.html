@@ -1,0 +1,93 @@
+<div class="card-body" *ngIf="filteredcontactDetail && !isEdit">
+  <h5 class="card-title">
+    {{ filteredcontactDetail.name }}
+  </h5>
+  <div class="card-text">
+    <div>
+      {{ filteredcontactDetail.number }}
+    </div>
+    <div class="d-flex btn-category">
+      <button class="btn btn-info" (click)="editContacts()">Edit</button>
+      <button class="btn btn-danger" (click)="deleteContact()">Delete</button>
+    </div>
+  </div>
+</div>
+<div class="card-body" *ngIf="isEdit">
+  <div class="card-text">
+    <form
+      name="form"
+      (ngSubmit)="addForm.form.valid && addNumber(addForm)"
+      #addForm="ngForm"
+      class="d-flex padding-between"
+      novalidate
+    >
+      <div
+        class="mb-3"
+        [ngClass]="{ 'has-error': addForm.submitted && !name.valid }"
+      >
+        <label for="username">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          name="name"
+          ngModel
+          #name="ngModel"
+          [(ngModel)]="filteredcontactDetail.name"
+          required
+        />
+        <div
+          class="error-message"
+          *ngIf="name.invalid && name.dirty && name.touched"
+        >
+          Should Contain Alphabets only
+        </div>
+        <div
+          *ngIf="addForm.submitted && !name.valid"
+          class="help-block text-danger"
+        >
+          Username is required
+        </div>
+      </div>
+      <div
+        class="mb-3"
+        [ngClass]="{ 'has-error': addForm.submitted && !number.valid }"
+      >
+        <label for="number">Number</label>
+        <input
+          type="text"
+          class="form-control"
+          id="number"
+          name="number"
+          ngModel
+          #number="ngModel"
+          [(ngModel)]="filteredcontactDetail.number"
+          pattern="^\+(\d{1,4})-(\d{7,10})$"
+          required
+        />
+        <div
+          class="error-message"
+          *ngIf="number.invalid && number.dirty && number.touched"
+        >
+          Number should start with +91 and should contain number
+        </div>
+        <div
+          *ngIf="addForm.submitted && !number.valid"
+          class="help-block text-danger"
+        >
+          Number is required
+        </div>
+      </div>
+      <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary btn-submit">
+          Edit
+        </button>
+        <img
+          *ngIf="loading"
+          src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+        />
+      </div>
+    </form>
+  </div>
+</div>
+<div></div>
