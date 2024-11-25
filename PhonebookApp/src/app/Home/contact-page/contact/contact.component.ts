@@ -73,7 +73,13 @@ export class ContactComponent implements OnInit {
     this.contact.editContact(editedcontact, id).subscribe({
       next: (edited) => {
         console.log(edited);
-        this.getContacts();
+        for (let i = 0; i < this.filteredcontactDetails.length; i++) {
+          if (this.filteredcontactDetails[i].id === id) {
+            this.filteredcontactDetails[i] = editedcontact;
+          }
+        }
+
+        //this.getContacts();
         /*let id = this.dictionary.get(JSON.stringify(editedcontact));
         if (id) {
           this.filteredcontactDetails[id] = editedcontact;

@@ -25,6 +25,7 @@ export class ItemsComponent {
     this.filteredcontactDetail = { ...form.value };
     console.log(this.filteredcontactDetail);
     this.edit.emit(this.filteredcontactDetail);
+    this.isEdit = false;
   }
   deleteContact() {
     this.delete.emit();
